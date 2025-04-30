@@ -27,29 +27,24 @@
 
         /* Responsive carousel styles */
         .carousel {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            min-height: 400px; /* Minimum height for small devices */
+            min-height: 240px; /* 40% menos de 400px */
         }
-
         @media (min-width: 640px) {
             .carousel {
-                min-height: 500px;
+                min-height: 300px; /* 40% menos de 500px */
             }
         }
-
         @media (min-width: 768px) {
             .carousel {
-                min-height: 600px;
+                min-height: 360px; /* 40% menos de 600px */
+            }
+        }
+        @media (min-width: 1024px) {
+            .carousel {
+                min-height: 420px; /* 40% menos de 700px */
             }
         }
 
-        @media (min-width: 1024px) {
-            .carousel {
-                min-height: 700px;
-            }
-        }
 
         .carousel-inner {
             position: relative;
@@ -317,31 +312,29 @@
         <div class="carousel" aria-label="Galería de imágenes destacadas">
             <div class="carousel-inner">
                 <div class="carousel-item active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1603372441486-70b7fb1a870e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 1">
-                    <div class="text-center px-4 sm:px-6 lg:px-8">
+                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-72">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Descubre el arte de la improvisación</h2>
-                        <p class="text-lg sm:text-xl md:text-2xl text-blue-400 mb-6 sm:mb-8">Clases, shows y experiencias únicas en Santiago y online</p>
+                        <p class="text-xl sm:text-2xl md:text-3xl text-blue-600 mb-6 sm:mb-8">Clases, shows y experiencias únicas en Santiago y online</p>
                         <a href="#cursos" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
                             Ver nuestros cursos
                             <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
-
                 <div class="carousel-item" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 2">
-                    <div class="text-center px-4 sm:px-6 lg:px-8">
+                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-72">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Cartelera de shows</h2>
-                        <p class="text-lg sm:text-xl md:text-2xl text-blue-400 mb-6 sm:mb-8">Disfruta de nuestras presentaciones semanales</p>
+                        <p class="text-xl sm:text-2xl md:text-3xl text-blue-600 mb-6 sm:mb-8">Disfruta de nuestras presentaciones semanales</p>
                         <a href="#shows" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
                             Ver cartelera
                             <i class="fas fa-ticket-alt ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
-
                 <div class="carousel-item" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 3">
-                    <div class="text-center px-4 sm:px-6 lg:px-8">
+                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-72">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Quiénes somos</h2>
-                        <p class="text-lg sm:text-xl md:text-2xl text-blue-400 mb-6 sm:mb-8">Descubre nuestra misión y valores</p>
+                        <p class="text-xl sm:text-2xl md:text-3xl text-blue-600 mb-6 sm:mb-8">Descubre nuestra misión y valores</p>
                         <a href="#about" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
                             Conócenos
                             <i class="fas fa-users ml-2" aria-hidden="true"></i>

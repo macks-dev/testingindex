@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>República Impro | Escuela de Improvisación Teatral</title>
+    <meta name="description" content="Versión mejorada del sitio República Impro: inscripción, área de estudiantes, galería, blog, calendario, responsive, testimonios, reservas y UX/UI avanzado."/>
+
+    <meta property="og:title" content="República Impro | Escuela de Improvisación Teatral" />
+    <meta property="og:description" content="Escuela de improvisación teatral con cursos presenciales y online, shows semanales y experiencias únicas en Santiago." />
+    <meta property="og:image" content="https://placehold.co/1200x630/E8117F/white?text=Republica+Impro" />
+    <meta property="og:url" content="https://republicaimpro.cl" /> <meta property="og:type" content="website" />
+
+    <link rel="canonical" href="https://republicaimpro.cl" /> <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@3.3.1/index.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/open-sans@4.5.14/index.min.css" rel="stylesheet">
+
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Responsive carousel styles */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            min-height: 400px; /* Minimum height for small devices */
+        }
+
+        @media (min-width: 640px) {
+            .carousel {
+                min-height: 500px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .carousel {
+                min-height: 600px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .carousel {
+                min-height: 700px;
+            }
+        }
+
+        .carousel-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .carousel-indicator.active {
+            background-color: white;
+        }
+
+        /* Responsive flash card styles */
+        .flip-card {
+            perspective: 1000px;
+            min-height: 350px; /* Minimum height for small devices */
+        }
+
+        @media (min-width: 640px) {
+            .flip-card {
+                min-height: 380px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .flip-card {
+                min-height: 400px;
+            }
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* Additional styles for mobile menu */
+        .mobile-menu {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px; /* Adjust based on content */
+            opacity: 1;
+        }
+
+        /* Improvements for forms on small screens */
+        @media (max-width: 640px) {
+            input, textarea, select {
+                font-size: 16px !important; /* Prevent iOS zoom */
+                padding: 0.75rem !important;
+            }
+
+            .contact-form-section {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
+
+        /* Responsive map styles */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Testimonial card styles */
+        .testimonial-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Smooth animations for interactions */
+        .btn-transition {
+            transition: all 0.3s ease;
+        }
+
+        /* Improved footer spacing on mobile */
+        @media (max-width: 768px) {
+            .footer-section {
+                margin-bottom: 2rem;
+            }
+
+            .footer-links {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Accessibility improvements for focus states */
+        a:focus, button:focus, input:focus, textarea:focus, select:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+
+        /* Form error indicators */
+        .input-error {
+            border-color: #ef4444 !important;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Overlay for success messages */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .success-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-message {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            max-width: 90%;
+            width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-gray-50">
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="#inicio" aria-label="Ir a inicio">
+                            <h1 class="text-xl sm:text-2xl font-bold text-gray-800">República Impro</h1>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
+                    <a href="#inicio" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Inicio</a>
+                    <a href="#cursos" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Cursos</a>
+                    <a href="#shows" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Shows</a>
+                    <a href="#about" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Nosotros</a>
+                    <a href="#testimonios" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Testimonios</a>
+                    <a href="#contacto" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contacto</a>
+                </div>
+                <div class="flex md:hidden items-center">
+                    <button
+                        type="button"
+                        id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
+                        aria-expanded="false"
+                        aria-controls="mobile-menu"
+                        aria-label="Abrir menú de navegación">
+                        <span class="sr-only">Abrir menú</span>
+                        <i class="fas fa-bars" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu md:hidden" aria-hidden="true">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Inicio</a>
+                <a href="#cursos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Cursos</a>
+                <a href="#shows" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Shows</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Nosotros</a>
+                <a href="#testimonios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Testimonios</a>
+                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="inicio" class="pt-16">
+        <div class="carousel" aria-label="Galería de imágenes destacadas">
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1603372441486-70b7fb1a870e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 1">
+                    <div class="text-center px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Descubre el arte de la improvisación</h2>
+                        <p class="text-lg sm:text-xl md:text-2xl text-blue-400 mb-6 sm:mb-8">Clases, shows y experiencias únicas en Santiago y online</p>
+                        <a href="#cursos" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
+                            Ver nuestros cursos
+                            <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 2">
+                    <div class="text-center px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Cartelera de shows</h2>
+                        <p class="text-lg sm:text-xl md:text-2xl text-blue-400 mb-6 sm:mb-8">Disfruta de nuestras presentaciones semanales</p>
+                        <a href="#shows" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
+                            Ver cartelera
+                            <i class="fas fa-ticket-alt ml-2" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 3">
+                    <div class="text-center px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Quiénes somos</h2>
+                        <p class="text-lg sm:text-xl md:text-2xl text-blue-400 mb-6 sm:mb-8">Descubre nuestra misión y valores</p>
+                        <a href="#about" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
+                            Conócenos
+                            <i class="fas fa-users ml-2" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-indicators" role="tablist">
+                <span class="carousel-indicator active" data-slide="0" role="tab" aria-label="Slide 1" aria-selected="true" tabindex="0"></span>
+                <span class="carousel-indicator" data-slide="1" role="tab" aria-label="Slide 2" aria-selected="false" tabindex="0"></span>
+                <span class="carousel-indicator" data-slide="2" role="tab" aria-label="Slide 3" aria-selected="false" tabindex="0"></span>
+            </div>
+        </div>
+    </section>
+
+    <section id="cursos" class="py-12 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Cursos y Talleres 2025</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Descubre nuestra oferta formativa y comienza tu viaje en el mundo de la improvisación teatral.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Card 1: Impro Nivel 1 -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-blue-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Principiantes</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Nivel 1</h3>
+                            <p class="text-gray-600 mb-4">El curso perfecto para iniciarte en la improvisación. Aprenderás los fundamentos y técnicas básicas.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$80.000</p>
+                                <p class="text-sm text-gray-500">Duración: 8 semanas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: 15 de mayo, 2025</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Nivel 1">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Impro Nivel 1 - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Este curso está diseñado para personas sin experiencia previa. Aprenderás:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>Fundamentos de la improvisación</li>
+                                <li>Escucha activa y aceptación</li>
+                                <li>Creación de personajes básicos</li>
+                                <li>Construcción de escenas</li>
+                                <li>Trabajo en equipo y confianza</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Lunes y miércoles de 19:00 a 21:00</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2: Impro Nivel 2 -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-green-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Intermedio</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Nivel 2</h3>
+                            <p class="text-gray-600 mb-4">Profundiza en el arte de la improvisación y desarrolla habilidades más avanzadas.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$90.000</p>
+                                <p class="text-sm text-gray-500">Duración: 10 semanas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: 1 de junio, 2025</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Nivel 2">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Impro Nivel 2 - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Para alumnos que ya han completado el Nivel 1 o tienen experiencia previa:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>Técnicas narrativas avanzadas</li>
+                                <li>Construcción de personajes complejos</li>
+                                <li>Exploración de emociones</li>
+                                <li>Formatos de improvisación</li>
+                                <li>Presencia escénica</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Martes y jueves de 19:00 a 21:30</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3: Impro Musical -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-purple-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Especialización</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Musical</h3>
+                            <p class="text-gray-600 mb-4">Aprende a combinar improvisación teatral con elementos musicales para crear experiencias únicas.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$110.000</p>
+                                <p class="text-sm text-gray-500">Duración: 8 semanas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: 10 de junio, 2025</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Musical">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Impro Musical - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Un curso especializado para quienes desean explorar la improvisación musical:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>Fundamentos de improvisación musical</li>
+                                <li>Creación de canciones improvisadas</li>
+                                <li>Técnicas vocales básicas</li>
+                                <li>Ritmo y melodía</li>
+                                <li>Estructura de canciones improvisadas</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Sábados de 10:00 a 14:00</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4: Impro Nivel 3 -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-red-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Avanzado</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Nivel 3</h3>
+                            <p class="text-gray-600 mb-4">Para improvisadores experimentados. Perfecciona tus habilidades y prepárate para actuar profesionalmente.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$120.000</p>
+                                <p class="text-sm text-gray-500">Duración: 12 semanas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: 5 de julio, 2025</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Nivel 3">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Impro Nivel 3 - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Un curso diseñado para improvisadores experimentados:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>Técnicas avanzadas de dirección escénica</li>
+                                <li>Formatos largos de improvisación</li>
+                                <li>Estilos teatrales en la improvisación</li>
+                                <li>Trabajo con público y técnicas de interacción</li>
+                                <li>Preparación para shows profesionales</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Lunes y miércoles de 19:30 a 22:00</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5: Impro Online -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-yellow-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Online</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Online</h3>
+                            <p class="text-gray-600 mb-4">Aprende improvisación desde cualquier lugar. Curso 100% online con sesiones en vivo y contenido bajo demanda.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$70.000</p>
+                                <p class="text-sm text-gray-500">Duración: 8 semanas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: Cada mes</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Online">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Impro Online - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Ideal para quienes no pueden asistir presencialmente o viven fuera de Santiago:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>Clases en vivo a través de Zoom</li>
+                                <li>Grupos reducidos para atención personalizada</li>
+                                <li>Material complementario en plataforma de aprendizaje</li>
+                                <li>Ejercicios prácticos adaptados al formato online</li>
+                                <li>Comunidad virtual de estudiantes</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Martes y jueves de 20:00 a 21:30</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6: Taller de Verano -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-indigo-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Intensivo</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Taller de Verano</h3>
+                            <p class="text-gray-600 mb-4">Sumérgete en la improvisación con nuestro curso intensivo de verano. Una experiencia inmersiva para todos los niveles.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$150.000</p>
+                                <p class="text-sm text-gray-500">Duración: 2 semanas intensivas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: 5 de enero, 2025</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Taller de Verano">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Taller de Verano - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Un programa intensivo para quienes quieren avanzar rápidamente:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>5 horas diarias de entrenamiento</li>
+                                <li>Grupos reducidos (máximo 12 estudiantes)</li>
+                                <li>Muestra final abierta al público</li>
+                                <li>Módulos especializados por profesores invitados</li>
+                                <li>Material didáctico incluido</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Lunes a viernes de 16:00 a 21:00</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 7: Soundpainting -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-orange-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Taller</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Soundpainting</h3>
+                            <p class="text-gray-600 mb-4">Explora la técnica de Soundpainting para dirigir improvisaciones escénicas con gestos musicales y de movimiento.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$80.000</p>
+                                <p class="text-sm text-gray-500">Duración: 6 semanas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: 15 de abril, 2025</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Soundpainting">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Soundpainting - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Taller práctico de improvisación gestual para música y teatro:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>Aprende los gestos básicos de Soundpainting</li>
+                                <li>Dirige improvisadores y músicos en tiempo real</li>
+                                <li>Combina señales sonoras, visuales y corporales</li>
+                                <li>Desarrolla espectáculos improvisados guiados</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Viernes 19:00 - 21:00</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 8: Voz y Silencio -->
+                <div class="flip-card h-full">
+                    <div class="flip-card-inner h-full">
+                        <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
+                            <div class="bg-pink-600 text-white text-xs font-bold uppercase px-2 py-1 rounded-full self-start mb-4">Taller</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Voz y Silencio</h3>
+                            <p class="text-gray-600 mb-4">Un viaje a la improvisación a través de la voz, la pausa y la conexión con el silencio.</p>
+                            <div class="mt-auto">
+                                <p class="text-2xl font-bold text-gray-900 mb-2">$90.000</p>
+                                <p class="text-sm text-gray-500">Duración: 8 semanas</p>
+                                <p class="text-sm text-gray-500 mb-4">Inicio: 10 de abril, 2025</p>
+                                <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Voz y Silencio">
+                                    Más información
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flip-card-back bg-gray-100 h-full">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Voz y Silencio - Detalles</h3>
+                            <p class="text-gray-600 mb-4">Explora la comunicación vocal y el poder del silencio:</p>
+                            <ul class="list-disc list-inside text-gray-600 mb-4">
+                                <li>Técnicas de modulación y proyección de la voz</li>
+                                <li>El papel del silencio en la dramaturgia</li>
+                                <li>Ritmo, pausa y escucha activa</li>
+                                <li>Conexión corporal y vocal en escena</li>
+                            </ul>
+                            <p class="text-sm text-gray-500 mb-4">Horarios: Lunes 18:00 - 20:00</p>
+                            <div class="mt-auto">
+                                <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
+                                    Inscríbeme
+                                </a>
+                                <button class="flip-card-btn w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Volver a información resumida">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shows" class="py-12 sm:py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Cartelera de Shows 2025</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Disfruta de nuestras presentaciones semanales de improvisación teatral. ¡Cada show es único e irrepetible!</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Show 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1567593810070-7a3d471af022?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Impro Live - Presentación de improvisación" class="w-full h-48 object-cover">
+                    <div class="p-4 sm:p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">Impro Live</h3>
+                                <p class="text-gray-500">Viernes 20:30 hrs</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">En cartelera</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Nuestro formato clásico de improvisación. El público propone y los actores crean escenas en el momento.</p>
+                        <div class="mt-auto">
+                            <p class="text-sm text-gray-500 mb-4">Próxima fecha: 3 de mayo, 2025</p>
+                            <a href="#contacto" class="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition">Reservar entradas</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Show 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1580809361436-42a7ec204889?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ImproMatch - Competencia de improvisación" class="w-full h-48 object-cover">
+                    <div class="p-4 sm:p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">ImproMatch</h3>
+                                <p class="text-gray-500">Sábados 21:00 hrs</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Estreno</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Dos equipos compiten por la risa y el aplauso del público. Tú decides quién gana en este divertido formato competitivo.</p>
+                        <div class="mt-auto">
+                            <p class="text-sm text-gray-500 mb-4">Próxima fecha: 4 de mayo, 2025</p>
+                            <a href="#contacto" class="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition">Reservar entradas</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Show 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ImproviSong - Improvisación musical" class="w-full h-48 object-cover">
+                    <div class="p-4 sm:p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">ImproviSong</h3>
+                                <p class="text-gray-500">Jueves 20:00 hrs</p>
+                            </div>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Musical</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Un espectáculo donde las historias se convierten en canciones. Improvisación teatral y musical en su máxima expresión.</p>
+                        <div class="mt-auto">
+                            <p class="text-sm text-gray-500 mb-4">Próxima fecha: 9 de mayo, 2025</p>
+                            <a href="#contacto" class="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition">Reservar entradas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8 sm:mt-10">
+                <a href="#contacto" class="inline-flex items-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
+                    Ver cartelera completa
+                    <i class="fas fa-calendar-alt ml-2" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva sección para "Nosotros" -->
+    <section id="about" class="py-12 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Quiénes Somos</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Conoce a República Impro, nuestra historia y nuestra misión en el mundo de la improvisación teatral.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo de República Impro" class="rounded-lg shadow-md w-full">
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Nuestra Historia</h3>
+                    <p class="text-gray-600 mb-6">República Impro nació en 2015 con la misión de difundir y profesionalizar el arte de la improvisación teatral en Chile. Fundada por un grupo de artistas apasionados por la creación espontánea, hemos crecido hasta convertirnos en una de las escuelas de referencia en el país.</p>
+                    
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Nuestra Misión</h3>
+                    <p class="text-gray-600 mb-6">Buscamos crear un espacio seguro y estimulante donde cada persona pueda desarrollar su creatividad, habilidades comunicativas y expresión artística a través de la improvisación teatral. Creemos firmemente en el poder transformador del arte y en su capacidad para generar conexiones humanas significativas.</p>
+                    
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Nuestros Valores</h3>
+                    <ul class="list-disc list-inside text-gray-600 mb-6">
+                        <li><span class="font-semibold">Colaboración:</span> Creemos en el poder del trabajo en equipo y la inteligencia colectiva.</li>
+                        <li><span class="font-semibold">Aceptación:</span> Promovemos la escucha activa y la aceptación de ideas como motor creativo.</li>
+                        <li><span class="font-semibold">Inclusión:</span> Valoramos la diversidad y generamos espacios seguros para todas las personas.</li>
+                        <li><span class="font-semibold">Profesionalismo:</span> Nos comprometemos con la excelencia y el crecimiento constante.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 text-center mb-8">Nuestro Equipo</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm text-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="María González - Directora" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold text-gray-900">María González</h4>
+                        <p class="text-blue-600">Directora</p>
+                        <p class="text-gray-600 mt-2">Actriz, directora y docente con más de 15 años de experiencia en improvisación.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm text-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Vega - Coordinador Académico" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold text-gray-900">Carlos Vega</h4>
+                        <p class="text-blue-600">Coordinador Académico</p>
+                        <p class="text-gray-600 mt-2">Improvisador con formación internacional, especialista en formatos largos y narrativa.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm text-center">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura Soto - Profesora" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold text-gray-900">Laura Soto</h4>
+                        <p class="text-blue-600">Profesora</p>
+                        <p class="text-gray-600 mt-2">Especialista en impro musical y técnicas vocales aplicadas a la improvisación escénica.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm text-center">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Pedro Fuentes - Profesor" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold text-gray-900">Pedro Fuentes</h4>
+                        <p class="text-blue-600">Profesor</p>
+                        <p class="text-gray-600 mt-2">Actor físico especializado en técnicas corporales y clown para la improvisación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios" class="py-12 sm:py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Testimonios</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Lo que dicen quienes han vivido la experiencia República Impro.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md testimonial-card">
+                    <p class="text-gray-700 italic mb-4">"Me encantó la energía de las clases de Impro Nivel 1. ¡Hoy me siento más seguro/a en el escenario!"</p>
+                    <p class="text-gray-900 font-bold text-right">- Juan Pérez</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md testimonial-card">
+                    <p class="text-gray-700 italic mb-4">"El Taller de Verano superó mis expectativas. Aprendí muchísimo en poco tiempo y conocí grandes amigos."</p>
+                    <p class="text-gray-900 font-bold text-right">- María López</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md testimonial-card">
+                    <p class="text-gray-700 italic mb-4">"Gracias a República Impro, me atreví a subir al escenario en ImproviSong. ¡Una experiencia inolvidable!"</p>
+                    <p class="text-gray-900 font-bold text-right">- Carlos García</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-12 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contáctanos</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">¿Tienes dudas sobre nuestros cursos o shows? ¿Estás interesado en contratar un espectáculo? Escríbenos y te responderemos a la brevedad.</p>
+            </div>
+
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+                <div class="bg-white rounded-lg shadow-md mb-8 lg:mb-0 contact-form-section">
+                    <div class="p-4 sm:p-6 lg:p-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Envíanos un mensaje</h3>
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" aria-required="true">
+                                <p class="error-message"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" aria-required="true">
+                                <p class="error-message"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label for="asunto" class="block text-sm font-medium text-gray-700 mb-1">Asunto</label>
+                                <select id="asunto" name="asunto" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" aria-required="true">
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="cursos">Información sobre cursos</option>
+                                    <option value="shows">Información sobre shows</option>
+                                    <option value="contrataciones">Contratar un espectáculo</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                                <p class="error-message"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" aria-required="true"></textarea>
+                                <p class="error-message"></p>
+                            </div>
+                            <div class="flex items-center mb-4">
+                                <input id="politica" name="politica" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" aria-required="true">
+                                <label for="politica" class="ml-2 block text-sm text-gray-700">
+                                    Acepto los términos y condiciones
+                                </label>
+                                <p class="error-message"></p>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition">
+                                Enviar mensaje
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-white rounded-lg shadow-md mb-6 p-4 sm:p-6 lg:p-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Información de contacto</h3>
+                        <div class="space-y-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-blue-600 mt-1" aria-hidden="true"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">Av. Providencia 1234, Providencia, Santiago</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-blue-600 mt-1" aria-hidden="true"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">+56 9 1234 5678</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-envelope text-blue-600 mt-1" aria-hidden="true"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">contacto@republicaimpro.cl</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-clock text-blue-600 mt-1" aria-hidden="true"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">Lunes a Viernes: 15:00 - 21:00<br>Sábados: 10:00 - 14:00</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 flex space-x-4">
+                                <a href="https://facebook.com/republicaimpro" class="text-gray-400 hover:text-blue-500 transition-colors duration-300" aria-label="Facebook de República Impro" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-facebook-f text-xl" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://instagram.com/republicaimpro" class="text-gray-400 hover:text-blue-500 transition-colors duration-300" aria-label="Instagram de República Impro" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-instagram text-xl" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://youtube.com/republicaimpro" class="text-gray-400 hover:text-blue-500 transition-colors duration-300" aria-label="YouTube de República Impro" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-youtube text-xl" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://tiktok.com/@republicaimpro" class="text-gray-400 hover:text-blue-500 transition-colors duration-300" aria-label="TikTok de República Impro" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-tiktok text-xl" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md mb-6 p-4 sm:p-6 lg:p-8">
+                        <p class="text-gray-600 mb-0">También puedes inscribirte escribiendo a <a href="mailto:inscripcionimpro2025@gmail.com" class="text-blue-600 hover:underline">inscripcionimpro2025@gmail.com</a></p>
+                    </div>
+                    <div class="map-container rounded-lg overflow-hidden shadow-md" aria-label="Ubicación de República Impro en Google Maps">
+                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.11781868178!2d-70.6143052848013!3d-33.43026448077668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf654859a5a1%3A0x5d13215b457210e3!2sTeatro%20Nescafé%20de%20las%20Artes!5e0!3m2!1ses-419!2scl!4v1647984055865!5m2!1ses-419!2scl" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="footer-section">
+                    <h3 class="text-xl font-bold mb-4">República Impro</h3>
+                    <p class="text-gray-300 mb-6">Escuela y compañía de improvisación teatral dedicada a la formación, creación y difusión del arte de la improvisación en Chile.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://facebook.com/republicaimpro" class="text-gray-300 hover:text-white transition-colors duration-300" aria-label="Facebook de República Impro" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://instagram.com/republicaimpro" class="text-gray-300 hover:text-white transition-colors duration-300" aria-label="Instagram de República Impro" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://youtube.com/republicaimpro" class="text-gray-300 hover:text-white transition-colors duration-300" aria-label="YouTube de República Impro" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-youtube" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://tiktok.com/@republicaimpro" class="text-gray-300 hover:text-white transition-colors duration-300" aria-label="TikTok de República Impro" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-tiktok" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="text-lg font-bold mb-4">Enlaces rápidos</h3>
+                    <ul class="space-y-2 footer-links">
+                        <li><a href="#inicio" class="text-gray-300 hover:text-white transition-colors duration-300">Inicio</a></li>
+                        <li><a href="#cursos" class="text-gray-300 hover:text-white transition-colors duration-300">Cursos</a></li>
+                        <li><a href="#shows" class="text-gray-300 hover:text-white transition-colors duration-300">Shows</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300">Nosotros</a></li>
+                        <li><a href="#testimonios" class="text-gray-300 hover:text-white transition-colors duration-300">Testimonios</a></li>
+                        <li><a href="#contacto" class="text-gray-300 hover:text-white transition-colors duration-300">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="text-lg font-bold mb-4">Nuestros cursos</h3>
+                    <ul class="space-y-2 footer-links">
+                        <li><a href="#cursos" class="text-gray-300 hover:text-white transition-colors duration-300">Impro Nivel 1</a></li>
+                        <li><a href="#cursos" class="text-gray-300 hover:text-white transition-colors duration-300">Impro Nivel 2</a></li>
+                        <li><a href="#cursos" class="text-gray-300 hover:text-white transition-colors duration-300">Impro Nivel 3</a></li>
+                        <li><a href="#cursos" class="text-gray-300 hover:text-white transition-colors duration-300">Impro Musical</a></li>
+                        <li><a href="#cursos" class="text-gray-300 hover:text-white transition-colors duration-300">Impro Online</a></li>
+                        <li><a href="#cursos" class="text-gray-300 hover:text-white transition-colors duration-300">Talleres Especiales</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="text-lg font-bold mb-4">Suscríbete a nuestro boletín</h3>
+                    <p class="text-gray-300 mb-4">Recibe información sobre nuevos cursos, shows y promociones.</p>
+                    <form id="newsletter-form" class="mb-4">
+                        <div class="flex">
+                            <input type="email" placeholder="Tu email" class="px-3 py-2 w-full rounded-l-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Tu dirección de correo electrónico para el boletín" aria-required="true">
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 rounded-r-md px-4 transition duration-300 btn-transition" aria-label="Suscribirse al boletín">
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <p class="error-message"></p>
+                    </form>
+                    <p class="text-xs text-gray-400">Al suscribirte, aceptas nuestros términos y condiciones.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+                <p class="text-sm text-gray-400 mb-4 sm:mb-0">© 2025 República Impro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="success-overlay" class="success-overlay" role="dialog" aria-modal="true" aria-labelledby="success-message-title" aria-describedby="success-message-description" aria-hidden="true">
+        <div class="success-message">
+            <h3 id="success-message-title" class="text-xl font-bold text-gray-900 mb-2">¡Mensaje enviado!</h3>
+            <p id="success-message-description" class="text-gray-600 mb-6">Gracias por contactarnos. Te responderemos a la brevedad.</p>
+            <button id="close-success-overlay" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 btn-transition">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carousel functionality
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+    
+            let currentSlide = 0;
+            let interval = setInterval(nextSlide, 5000); // Auto-advance every 5 seconds
+    
+            function showSlide(index) {
+                // Deactivate current slide and indicator
+                carouselItems[currentSlide].classList.remove('active');
+                indicators[currentSlide].classList.remove('active');
+                indicators[currentSlide].setAttribute('aria-selected', 'false');
+                indicators[currentSlide].setAttribute('tabindex', '-1');
+    
+                // Activate new slide and indicator
+                currentSlide = index;
+                carouselItems[currentSlide].classList.add('active');
+                indicators[currentSlide].classList.add('active');
+                indicators[currentSlide].setAttribute('aria-selected', 'true');
+                indicators[currentSlide].setAttribute('tabindex', '0');
+    
+                // Restart interval
+                clearInterval(interval);
+                interval = setInterval(nextSlide, 5000);
+            }
+    
+            function nextSlide() {
+                const nextIndex = (currentSlide + 1) % carouselItems.length;
+                showSlide(nextIndex);
+            }
+    
+            // Add click and touch event listeners to indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    showSlide(index);
+                });
+    
+                // Support for touch events
+                indicator.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    this.click(); // Trigger click event on touchend
+                });
+    
+                // Add keyboard navigation for indicators
+                indicator.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        showSlide(index);
+                    }
+                });
+            });
+    
+            // Flip Cards functionality
+            const flipButtons = document.querySelectorAll('.flip-card-btn');
+    
+            flipButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.flip-card');
+                    card.classList.toggle('flipped');
+                    // Update aria-expanded for accessibility
+                    const isFlipped = card.classList.contains('flipped');
+                    this.setAttribute('aria-expanded', isFlipped);
+                    // Manage focus between front and back buttons (basic example)
+                    if (isFlipped) {
+                        card.querySelector('.flip-card-back .flip-card-btn').focus();
+                    } else {
+                        card.querySelector('.flip-card-front .flip-card-btn').focus();
+                    }
+                });
+    
+                // Support for touch events
+                button.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    this.click(); // Trigger click event on touchend
+                });
+            });
+    
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+    
+            mobileMenuButton.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('active');
+                mobileMenu.setAttribute('aria-hidden', isExpanded);
+    
+                // Change icon based on menu state
+                const icon = this.querySelector('i');
+                if (mobileMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+    
+            // Close mobile menu when a link is clicked
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+    
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+    
+                    const target = document.querySelector(this.getAttribute('href'));
+    
+                    if (target) {
+                        // Offset to compensate for fixed navigation bar
+                        const navHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+    
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+    
+            // Smooth scroll for "Inscríbeme" buttons
+            document.querySelectorAll('a').forEach(anchor => {
+                if (anchor.textContent.trim().toLowerCase() === 'inscríbeme') {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const target = document.getElementById('contacto');
+                        if (target) {
+                            const navHeight = document.querySelector('nav').offsetHeight;
+                            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                }
+            });
+    
+            // Lazy loading for images
+            if ('IntersectionObserver' in window) {
+                const imgObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const src = img.getAttribute('data-src');
+    
+                            if (src) {
+                                img.src = src;
+                                img.removeAttribute('data-src');
+                            }
+    
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+    
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imgObserver.observe(img);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    img.src = img.getAttribute('data-src');
+                    img.removeAttribute('data-src');
+                });
+            }
+    
+            // Improved form validation with tactile feedback and success message
+            const contactForm = document.getElementById('contact-form');
+            const successOverlay = document.getElementById('success-overlay');
+            const closeSuccessOverlayButton = document.getElementById('close-success-overlay');
+    
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+    
+                    let isValid = true;
+                    const nombre = document.getElementById('nombre');
+                    const email = document.getElementById('email');
+                    const asunto = document.getElementById('asunto');
+                    const mensaje = document.getElementById('mensaje');
+                    const politica = document.getElementById('politica');
+    
+                    // Basic validations
+                    if (!nombre.value.trim()) {
+                        showError(nombre, 'Por favor, ingresa tu nombre');
+                        isValid = false;
+                    } else {
+                        clearError(nombre);
+                    }
+    
+                    if (!email.value.trim()) {
+                        showError(email, 'Por favor, ingresa tu email');
+                        isValid = false;
+                    } else if (!validateEmail(email.value)) {
+                        showError(email, 'Por favor, ingresa un email válido');
+                        isValid = false;
+                    } else {
+                        clearError(email);
+                    }
+    
+                    if (!asunto.value) {
+                        showError(asunto, 'Por favor, selecciona un asunto');
+                        isValid = false;
+                    } else {
+                        clearError(asunto);
+                    }
+    
+                    if (!mensaje.value.trim()) {
+                        showError(mensaje, 'Por favor, escribe tu mensaje');
+                        isValid = false;
+                    } else {
+                        clearError(mensaje);
+                    }
+    
+                    if (!politica.checked) {
+                        showError(politica, 'Debes aceptar los términos y condiciones');
+                        isValid = false;
+                    } else {
+                        clearError(politica);
+                    }
+    
+                    if (isValid) {
+                        // Simulate successful submission
+                        // In a real application, you would send the data to a server here
+                        console.log('Form submitted successfully:', {
+                            nombre: nombre.value,
+                            email: email.value,
+                            asunto: asunto.value,
+                            mensaje: mensaje.value
+                        });
+    
+                        this.reset(); // Clear form fields
+                        showSuccessMessage(); // Show success message
+                    } else {
+                        // Tactile feedback on mobile devices for validation errors
+                        if (window.navigator && window.navigator.vibrate) {
+                            window.navigator.vibrate(200); // Vibrate for 200ms
+                        }
+                    }
+                });
+            }
+    
+            // Basic email validation function
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-1]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+    
+            // Function to display error messages
+            function showError(input, message) {
+                const formGroup = input.parentElement;
+                let errorElement = formGroup.querySelector('.error-message');
+    
+                if (!errorElement) {
+                    errorElement = document.createElement('p');
+                    errorElement.classList.add('error-message', 'text-red-500', 'text-xs', 'mt-1');
+                    formGroup.appendChild(errorElement);
+                }
+    
+                errorElement.textContent = message;
+                input.classList.add('border-red-500', 'input-error');
+                input.setAttribute('aria-invalid', 'true');
+                input.setAttribute('aria-describedby', errorElement.id || (errorElement.id = input.id + '-error'));
+            }
+    
+            // Function to clear error messages
+            function clearError(input) {
+                const formGroup = input.parentElement;
+                const errorElement = formGroup.querySelector('.error-message');
+    
+                if (errorElement) {
+                    errorElement.textContent = '';
+                }
+    
+                input.classList.remove('border-red-500', 'input-error');
+                input.setAttribute('aria-invalid', 'false');
+                input.removeAttribute('aria-describedby');
+            }
+    
+            // Function to show success message overlay
+            function showSuccessMessage() {
+                successOverlay.classList.add('active');
+                successOverlay.setAttribute('aria-hidden', 'false');
+                // Set focus to the close button
+                closeSuccessOverlayButton.focus();
+            }
+    
+            // Function to hide success message overlay
+            function hideSuccessMessage() {
+                successOverlay.classList.remove('active');
+                successOverlay.setAttribute('aria-hidden', 'true');
+                // Return focus to the contact form or a logical element
+                contactForm.querySelector('button[type="submit"]').focus();
+            }
+    
+            // Close success message on button click
+            if (closeSuccessOverlayButton) {
+                closeSuccessOverlayButton.addEventListener('click', hideSuccessMessage);
+            }
+    
+            // Close success message on Escape key press
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && successOverlay && successOverlay.classList.contains('active')) {
+                    hideSuccessMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

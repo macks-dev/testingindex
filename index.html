@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>República Impro | Escuela de Improvisación Teatral</title>
+    <title>República de la Impro | Escuela de Improvisación Teatral</title>
     <meta name="description" content="Versión mejorada del sitio con calendario, responsive, testimonios, reservas y UX/UI avanzado."/>
 
-    <meta property="og:title" content="República Impro | Escuela de Improvisación Teatral" />
+    <meta property="og:title" content="República de la Impro | Escuela de Improvisación Teatral" />
     <meta property="og:description" content="Escuela de improvisación teatral presencial y online, shows semanales y experiencias únicas en Santiago." />
-    <meta property="og:image" content="https://placehold.co/1200x630/425fab/white?text=Republica+Impro" />
+    <meta property="og:image" content="https://placehold.co/1200x630/425fab/white?text=Republica+de+la+Impro" />
     <meta property="og:url" content="https://republicaimpro.cl" />
     <meta property="og:type" content="website" />
 
@@ -20,20 +20,23 @@
 
     <style>
         :root {
+            /* Colores según manual de marca */
             --color-1: #edeae2; /* Fondo claro */
             --color-2: #425fab; /* Azul principal */
             --color-3: #c0d3e9; /* Azul claro */
             --color-4: #bc4a25; /* Naranja/rojo ladrillo */
         }
 
-        /* Custom styles */
+        /* Tipografías según manual de marca */
         body {
-            font-family: 'Open Sans', sans-serif;
-            color: #333;
+            font-family: 'Alternate Gothic'; /* Alternativa web a Alternate Gothic */
+            color: #000; /* Negro para textos según manual */
         }
-        
+
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'AVENIR NEXT HEAVY'; /* Alternativa web a Avenir Next */
+            font-weight: 700; 
+            color: var(--color-2); /* Color azul principal para títulos según manual */
         }
 
         /* Reemplazar colores */
@@ -53,44 +56,28 @@
             background-color: var(--color-4) !important;
         }
 
-        /* Responsive carousel styles */
+        /* Carrusel rediseñado - indicadores arriba */
         .carousel {
-            min-height: 240px; /* 40% menos de 400px */
+            position: relative;
+            min-height: 400px;
         }
+
         @media (min-width: 640px) {
             .carousel {
-                min-height: 300px; /* 40% menos de 500px */
-            }
-        }
-        @media (min-width: 768px) {
-            .carousel {
-                min-height: 360px; /* 40% menos de 600px */
-            }
-        }
-        @media (min-width: 1024px) {
-            .carousel {
-                min-height: 420px; /* 40% menos de 700px */
+                min-height: 500px;
             }
         }
 
-        /* Spotlight effect for professor cards */
-        .professor-card { position: relative; overflow: hidden; }
-        .spotlight {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 300px; height: 300px;
-            transform: translate(-50%, -50%) scale(0.5);
-            background: radial-gradient(circle at center, rgba(255,255,224,0.8) 0%, rgba(0,0,0,0.9) 60%);
-            opacity: 0;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            pointer-events: none;
-            border-radius: 50%;
-            mix-blend-mode: screen;
-            z-index: 10;
+        @media (min-width: 768px) {
+            .carousel {
+                min-height: 600px;
+            }
         }
-        .professor-card.active .spotlight {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+
+        @media (min-width: 1024px) {
+            .carousel {
+                min-height: 700px;
+            }
         }
 
         .carousel-inner {
@@ -107,8 +94,6 @@
             height: 100%;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            background-size: cover;
-            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -118,9 +103,10 @@
             opacity: 1;
         }
 
+        /* INDICADORES REPOSICIONADOS ARRIBA */
         .carousel-indicators {
             position: absolute;
-            bottom: 20px;
+            top: 20px; /* Cambiado de bottom a top */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -131,16 +117,76 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: var(--color-3); /* Color 3 */
             margin: 0 5px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid white; /* Borde para visibilidad */
+            box-shadow: 0 0 4px rgba(0,0,0,0.3); /* Sombra para visibilidad */
         }
 
         .carousel-indicator.active {
-            background-color: white;
+            background-color: var(--color-4); /* Color 4 */
+            transform: scale(1.2);
+        }
+        
+        /* Clases para tamaños de título según manual */
+        .title-xl {
+            font-size: 2.5rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
         }
 
-        /* Responsive flash card styles */
+        @media (min-width: 768px) {
+            .title-xl {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .title-xl {
+                font-size: 4.5rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Botones según manual */
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--color-2);
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-4);
+            transform: translateY(-2px);
+        }
+
+        /* Estrella como elemento gráfico */
+        .star-graphic {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+        }
+
+        .star-graphic-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Estilos responsivos de las tarjetas interactivas (flip cards) */
         .flip-card {
             perspective: 1000px;
             min-height: 350px; /* Altura base */
@@ -218,7 +264,7 @@
             border-radius: 10px;
         }
         
-        /* Additional styles for mobile menu */
+        /* Estilos adicionales para el menú móvil */
         .mobile-menu {
             transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
             max-height: 0;
@@ -227,11 +273,11 @@
         }
 
         .mobile-menu.active {
-            max-height: 500px; /* Adjust based on content */
+            max-height: 500px; /* Ajustar según el contenido */
             opacity: 1;
         }
 
-        /* Improvements for forms on small screens */
+        /* Mejoras para formularios en pantallas pequeñas */
         @media (max-width: 640px) {
             input, textarea, select {
                 font-size: 16px !important; /* Prevent iOS zoom */
@@ -244,19 +290,19 @@
             }
         }
 
-        /* Testimonial card styles */
+        /* Estilos de las tarjetas de testimonios */
         .testimonial-card {
             height: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        /* Smooth animations for interactions */
+        /* Animaciones suaves para interacciones */
         .btn-transition {
             transition: all 0.3s ease;
         }
 
-        /* Improved footer spacing on mobile */
+        /* Espaciado mejorado del pie de página en móviles */
         @media (max-width: 768px) {
             .footer-section {
                 margin-bottom: 2rem;
@@ -267,13 +313,13 @@
             }
         }
 
-        /* Accessibility improvements for focus states */
+        /* Mejoras de accesibilidad para estados de foco */
         a:focus, button:focus, input:focus, textarea:focus, select:focus {
             outline: 2px solid var(--color-2);
             outline-offset: 2px;
         }
 
-        /* Form error indicators */
+        /* Indicadores de error en el formulario */
         .input-error {
             border-color: var(--color-4) !important;
         }
@@ -284,7 +330,7 @@
             margin-top: 0.25rem;
         }
 
-        /* Overlay for success messages */
+        /* Superposición para mensajes de éxito */
         .success-overlay {
             position: fixed;
             top: 0;
@@ -320,91 +366,6 @@
             scroll-behavior: smooth;
         }
 
-        /* === TEXTO SUPERPUESTO EN EL CARRUSEL === */
-        .carousel-title {
-          position: absolute;
-          top: 30%;
-          left: 0;
-          right: 0;
-          text-align: center;
-          z-index: 20;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          pointer-events: none; /* Para que no interfiera con los clics en los botones */
-        }
-
-        .carousel-title .republica {
-          font-family: "Avenir Next", "Playfair Display", serif;
-          font-size: 4rem;
-          color: var(--color-4);
-          line-height: 1;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          margin-bottom: 0.5rem;
-        }
-
-        .carousel-title .de-la {
-          font-family: "Avenir Next", "Open Sans", sans-serif;
-          font-size: 2rem;
-          color: var(--color-2);
-          line-height: 1;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          margin-bottom: 0.5rem;
-        }
-
-        .carousel-title .impro {
-          font-family: "Avenir Next", "Playfair Display", serif;
-          font-size: 4rem;
-          color: var(--color-4);
-          line-height: 1;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          margin-bottom: 0.5rem;
-        }
-
-        .carousel-title .escuela {
-          font-family: "Avenir Next", "Playfair Display", serif;
-          font-size: 3.5rem;
-          color: var(--color-4);
-          line-height: 1;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Responsive para el título del carrusel */
-        @media (max-width: 768px) {
-          .carousel-title .republica,
-          .carousel-title .impro {
-            font-size: 3rem;
-          }
-          
-          .carousel-title .de-la {
-            font-size: 1.5rem;
-          }
-          
-          .carousel-title .escuela {
-            font-size: 2.5rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .carousel-title .republica,
-          .carousel-title .impro {
-            font-size: 2rem;
-          }
-          
-          .carousel-title .de-la {
-            font-size: 1rem;
-          }
-          
-          .carousel-title .escuela {
-            font-size: 1.8rem;
-          }
-          
-          .carousel-title {
-            top: 20%;
-          }
-        }
-
         /* === EFECTO EXPANDIBLE PARA PROFESORES === */
         .professor-card {
           position: relative;
@@ -422,7 +383,7 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(188, 74, 37, 0.9); /* var(--color-4) con opacidad */
+          background-color: #c0d3e9; /* var(--color-2) con opacidad */
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -510,17 +471,17 @@
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
                         <a href="#inicio" aria-label="Ir a inicio">
-                            <h1 class="text-xl sm:text-2xl font-bold text-gray-800">República de la Impro</h1>
+                            <h1 class="text-xl sm:text-3xl font-bold --color-2">REPÚBLICA DE LA IMPRO</h1>
                         </a>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
-                    <a href="#inicio" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Inicio</a>
-                    <a href="#cursos" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Cursos</a>
-                    <a href="#shows" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Shows</a>
-                    <a href="#about" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Nosotros</a>
-                    <a href="#testimonios" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Testimonios</a>
-                    <a href="#contacto" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contacto</a>
+                    <a href="#inicio" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-xl font-medium">Inicio</a>
+                    <a href="#cursos" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-xl font-medium">Cursos</a>
+                    <a href="#shows" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-xl font-medium">Shows</a>
+                    <a href="#nosotros" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-xl font-medium">Nosotros</a>
+                    <a href="#testimonios" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-xl font-medium">Testimonios</a>
+                    <a href="#contacto" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-xl font-medium">Contacto</a>
                 </div>
                 <div class="flex md:hidden items-center">
                     <button
@@ -542,7 +503,7 @@
                 <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Inicio</a>
                 <a href="#cursos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Cursos</a>
                 <a href="#shows" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Shows</a>
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Nosotros</a>
+                <a href="#nosotros" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Nosotros</a>
                 <a href="#testimonios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Testimonios</a>
                 <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contacto</a>
             </div>
@@ -552,15 +513,9 @@
     <section id="inicio" class="pt-16">
         <div class="carousel" aria-label="Galería de imágenes destacadas">
             <div class="carousel-inner">
-                <!-- Texto superpuesto que estará presente en todos los slides -->
-                <div class="carousel-title">
-                  <div class="republica">República</div>
-                  <div class="de-la">DE LA</div>
-                  <div class="impro">Impro</div>
-                  <div class="escuela">Escuela</div>
-                </div>
+                <!-- carrusel-titulo removido -->
             
-                <div class="carousel-item active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1603372441486-70b7fb1a870e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 1">
+                <div class="carousel-item active" style="background-image: url('assets/Carrusel1.jpg'); background-size: cover; background-position: center;" aria-label="Slide 1">
                     <div class="text-center px-4 sm:px-6 lg:px-8 mt-96">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Descubre el arte de la improvisación</h2>
                         <p class="text-xl sm:text-2xl md:text-3xl text-blue-600 mb-6 sm:mb-8">Clases, shows y experiencias únicas en Santiago y online</p>
@@ -603,12 +558,12 @@
     <section id="cursos" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 sm:mb-12">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Cursos y Talleres 2025</h2>
+                <h2 class="text-6xl sm:text-6xl md:text-6xl font-heavy --color-2 mb-4">CURSOS Y TALLERES</h2>
                 <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Descubre nuestra oferta formativa y comienza tu viaje en el mundo de la improvisación teatral.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Card 1: Impro Nivel 1 -->
+                <!-- Tarjeta 1: Impro Nivel 1 -->
                 <div class="flip-card h-full">
                     <div class="flip-card-inner h-full">
                         <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
@@ -647,7 +602,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card 2: Impro Nivel 2 -->
+                <!-- Tarjeta 2: Impro Nivel 2 -->
                 <div class="flip-card h-full">
                     <div class="flip-card-inner h-full">
                         <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col flex-full">
@@ -686,7 +641,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card 3: Impro Musical -->
+                <!-- Tarjeta 3: Impro Musical -->
                 <div class="flip-card h-full">
                     <div class="flip-card-inner h-full">
                         <div class="flip-card-front bg-white p-4 sm:p-6 flex flex-col h-full">
@@ -732,7 +687,7 @@
     <section id="shows" class="py-12 sm:py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 sm:mb-12">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Cartelera de Shows 2025</h2>
+                <h2 class="text-6xl sm:text-6xl md:text-6xl font-bold --color-2 mb-4">FUNCIONES</h2>
                 <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Disfruta de nuestros espectáculos de improvisación cada semana, renovando la cartelera constantemente.</p>
             </div>
 
@@ -804,15 +759,15 @@
         </div>
     </section>
 
-    <section id="about" class="py-12 sm:py-16 bg-white">
+    <section id="nosotros" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Quiénes somos</h2>
+                <h2 class="text-6xl sm:text-6xl md:text-6xl font-bold --color-2 mb-4">QUIÉNES SOMOS</h2>
                 <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Somos un espacio de formación y creación teatral especializado en improvisación, con 12 años de experiencia impulsando el desarrollo de esta disciplina en Chile.</p>
             </div>
 
             <div class="mb-16">
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">Nuestros valores</h3>
+                <h3 class="text-xl sm:text-2xl font-bold --color-2 mb-6 text-center">Nuestros valores</h3>
                 
                 <!-- Valores como tarjetas expandibles -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -859,19 +814,19 @@
             </div>
 
             <div>
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">Nuestro equipo</h3>
+                <h3 class="text-xl sm:text-6xl font-bold --color-2 mb-6 text-center">NUESTRO EQUIPO</h3>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Profesor 1 -->
                     <div class="professor-card bg-gray-50 p-6 rounded-lg shadow-sm text-center">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Rodríguez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-                        <h4 class="text-lg font-bold text-gray-900">Carlos Rodríguez</h4>
+                        <img src="assets/Federico Castelacci.jpg" alt="Carlos Rodríguez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold --color-2">FEDERICO CASTELACCI</h4>
                         <p class="text-blue-600">Director</p>
                         <p class="text-gray-600 mt-2">Improvisador con más de 15 años de experiencia.</p>
                         
-                        <!-- Overlay con información adicional -->
+                        <!-- Overlay con información adicional -->    
                         <div class="info-overlay">
-                            <h4 class="text-lg font-bold mb-1">Carlos Rodríguez</h4>
+                            <h4 class="text-lg font-bold mb-1">FEDERICO CASTELACCI</h4>
                             <p class="mb-3">Director</p>
                             <p class="text-sm">Formado en Argentina y Estados Unidos, ha dirigido espectáculos de improvisación en todo Latinoamérica. Profesor de actuación y director de la compañía desde 2010.</p>
                             <div class="mt-3">
@@ -884,14 +839,14 @@
 
                     <!-- Profesor 2 -->
                     <div class="professor-card bg-gray-50 p-6 rounded-lg shadow-sm text-center">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Martínez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-                        <h4 class="text-lg font-bold text-gray-900">Ana Martínez</h4>
+                        <img src="assets/Monica Osben.jpg" alt="Ana Martínez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold --color-2">MONICA OSBEN</h4>
                         <p class="text-blue-600">Docente</p>
                         <p class="text-gray-600 mt-2">Especialista en técnicas vocales y teatro musical.</p>
                         
                         <!-- Overlay con información adicional -->
                         <div class="info-overlay">
-                            <h4 class="text-lg font-bold mb-1">Ana Martínez</h4>
+                            <h4 class="text-lg font-bold mb-1">MONICA OSBEN</h4>
                             <p class="mb-3">Docente</p>
                             <p class="text-sm">Cantante y actriz con formación en teatro musical. Experta en improvisación vocal y creación de personajes. Integra el elenco desde 2015 y dirige el área de formación musical.</p>
                             <div class="mt-3">
@@ -904,14 +859,14 @@
 
                     <!-- Profesor 3 -->
                     <div class="professor-card bg-gray-50 p-6 rounded-lg shadow-sm text-center">
-                        <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Pedro Sánchez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-                        <h4 class="text-lg font-bold text-gray-900">Pedro Sánchez</h4>
+                        <img src="assets/Pablo Boraquevich.jpg" alt="Pedro Sánchez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold --color-2">PABLO BORAQUEVICH</h4>
                         <p class="text-blue-600">Coach</p>
                         <p class="text-gray-600 mt-2">Especialista en improvisación narrativa y creativa.</p>
                         
                         <!-- Overlay con información adicional -->
                         <div class="info-overlay">
-                            <h4 class="text-lg font-bold mb-1">Pedro Sánchez</h4>
+                            <h4 class="text-lg font-bold mb-1">PABLO BORAQUEVICH</h4>
                             <p class="mb-3">Coach</p>
                             <p class="text-sm">Escritor, guionista e improvisador. Ha participado en festivales internacionales de improvisación en España, México y Colombia. Dirige el formato de teatro espontáneo y narrativa improvisada.</p>
                             <div class="mt-3">
@@ -924,14 +879,14 @@
 
                     <!-- Profesor 4 -->
                     <div class="professor-card bg-gray-50 p-6 rounded-lg shadow-sm text-center">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Laura Gómez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-                        <h4 class="text-lg font-bold text-gray-900">Laura Gómez</h4>
+                        <img src="assets/Rodrigo Castro.jpeg" alt="Laura Gómez" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                        <h4 class="text-lg font-bold --color-2">RODRIGO CASTRO</h4>
                         <p class="text-blue-600">Coordinadora</p>
                         <p class="text-gray-600 mt-2">Gestión de proyectos y coordinación académica.</p>
                         
                         <!-- Overlay con información adicional -->
                         <div class="info-overlay">
-                            <h4 class="text-lg font-bold mb-1">Laura Gómez</h4>
+                            <h4 class="text-lg font-bold mb-1">RODRIGO CASTRO</h4>
                             <p class="mb-3">Coordinadora</p>
                             <p class="text-sm">Gestora cultural con experiencia en producción teatral y eventos artísticos. Responsable de la programación, coordinación de cursos y desarrollo de proyectos especiales de la escuela.</p>
                             <div class="mt-3">
@@ -949,12 +904,12 @@
     <section id="testimonios" class="py-12 sm:py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 sm:mb-12">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Lo que dicen nuestros alumnos</h2>
+                <h2 class="text-2xl sm:text-6xl md:text-6xl font-bold --color-2 mb-4">QUE DICEN NUESTROS ALUMNOS</h2>
                 <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Historias de quienes han vivido la experiencia de aprender y disfrutar de la improvisación con nosotros.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Testimonial 1 -->
+                <!-- Testimonio 1 -->
                 <div class="testimonial-card bg-white p-6 rounded-lg shadow-sm">
                     <div class="flex items-center mb-4">
                         <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Valentina Méndez" class="w-12 h-12 rounded-full mr-4">
@@ -975,7 +930,7 @@
                     </div>
                 </div>
 
-                <!-- Testimonial 2 -->
+                <!-- Testimonio 2 -->
                 <div class="testimonial-card bg-white p-6 rounded-lg shadow-sm">
                     <div class="flex items-center mb-4">
                         <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Matías Torres" class="w-12 h-12 rounded-full mr-4">
@@ -996,7 +951,7 @@
                     </div>
                 </div>
 
-                <!-- Testimonial 3 -->
+                <!-- Testimonio 3 -->
                 <div class="testimonial-card bg-white p-6 rounded-lg shadow-sm">
                     <div class="flex items-center mb-4">
                         <img src="https://randomuser.me/api/portraits/women/87.jpg" alt="Daniela Fernández" class="w-12 h-12 rounded-full mr-4">
@@ -1023,7 +978,7 @@
     <section id="contacto" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 sm:mb-12">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contáctanos</h2>
+                <h2 class="text-6xl sm:text-6xl md:text-6xl font-bold --color-2 mb-4">CONTÁCTANOS</h2>
                 <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Estamos aquí para resolver tus dudas. Completa el formulario y te responderemos a la brevedad.</p>
             </div>
 
@@ -1185,7 +1140,7 @@
                         <li><a href="#inicio" class="text-gray-400 hover:text-white">Inicio</a></li>
                         <li><a href="#cursos" class="text-gray-400 hover:text-white">Cursos</a></li>
                         <li><a href="#shows" class="text-gray-400 hover:text-white">Shows</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white">Nosotros</a></li>
+                        <li><a href="#nosotros" class="text-gray-400 hover:text-white">Nosotros</a></li>
                         <li><a href="#testimonios" class="text-gray-400 hover:text-white">Testimonios</a></li>
                         <li><a href="#contacto" class="text-gray-400 hover:text-white">Contacto</a></li>
                     </ul>
